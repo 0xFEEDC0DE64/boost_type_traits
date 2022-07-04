@@ -3,6 +3,8 @@
 # Distributed under the Boost Software License, Version 1.0.
 # See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt
 
+if(NOT DEFINED IDF_TARGET)
+
 # We support CMake 3.5, but prefer 3.16 policies and behavior
 cmake_minimum_required(VERSION 3.5...3.16)
 
@@ -18,3 +20,15 @@ target_link_libraries(boost_type_traits
     Boost::config
     Boost::static_assert
 )
+
+else()
+
+idf_component_register(
+    INCLUDE_DIRS
+        include
+    REQUIRES
+        boost_config
+        boost_static_assert
+)
+
+endif()
